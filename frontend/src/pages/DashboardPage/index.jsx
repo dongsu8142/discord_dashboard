@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getGuildConfig, getGuildRoles, getUserDetails, updateDefaultRole, updateGuildPrefix } from '../../utils/api';
+import { getGuildConfig, getGuildRoles, getUserDetails, updateDefaultRole, updateGuildPrefix, getGuildChannels, updateJoinChannel } from '../../utils/api';
 import { DashboardMenu } from '../../components/DashboardMenu';
 
 export function DashboardPage({
@@ -10,6 +10,7 @@ export function DashboardPage({
   const [ loading, setLoading ] = useState(true);
   const [ config, setConfig ] = useState({});
   const [ roles, setRoles ] = useState([]);
+  const [ channels, setChannels ] = useState([]);
 
   useEffect(() => {
     getUserDetails()
@@ -23,13 +24,17 @@ export function DashboardPage({
       })
       .then(({data}) => {
         setRoles(data);
+        return getGuildChannels(match.params.id);
+      })
+      .then(({data}) => {
+        setChannels(data);
         setLoading(false);
       })
       .catch ((err) => {
         history.push('/');
         setLoading(false);
       })
-  }, []);
+  }, [history, match]);
 
   const updateGuildPrefixParent = async (prefix) => {
     try {
@@ -40,8 +45,12 @@ export function DashboardPage({
     }
   }
 
-  const updateDefaultRoleParent = async (roleId) => {
-    updateDefaultRole(match.params.id, roleId);
+  const updateDefaultRoleParent = async (roleId, roleOn) => {
+    updateDefaultRole(match.params.id, roleId, roleOn);
+  }
+
+  const updateJoinChannelParent = async (joinMemberChannel, joinMemberChannelOn, joinMemberChannelMessage) => {
+    updateJoinChannel(match.params.id, joinMemberChannel, joinMemberChannelOn, joinMemberChannelMessage);
   }
 
   return !loading && (
@@ -51,6 +60,8 @@ export function DashboardPage({
         user={user} 
         config={config} 
         roles={roles}
+        channels={channels}
+        updateJoinChannel={updateJoinChannelParent}
         updatePrefix={updateGuildPrefixParent} 
         updateRole={updateDefaultRoleParent}
       />

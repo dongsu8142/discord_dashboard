@@ -6,14 +6,12 @@ export function MenuPage({
   history,
 }) {
 
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [guilds, setGuilds] = useState({});
 
   useEffect(() => {
     getUserDetails()
       .then(({data}) => {
-        setUser(data);
         return getGuilds();
       }).then(({data}) => {
         setGuilds(data);
@@ -22,7 +20,7 @@ export function MenuPage({
         history.push('/');
         setLoading(false);
       })
-  }, [])
+  }, [history])
 
   return !loading && (
     <div>

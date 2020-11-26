@@ -4,7 +4,7 @@ const passport = require('passport');
 router.get('/discord', passport.authenticate('discord'));
 
 router.get('/discord/redirect', passport.authenticate('discord'), (req, res) => {
-    res.redirect('http://jjab6.ml/menu');
+    res.redirect('http://127.0.0.1/menu');
 });
 
 router.get('/', (req, res) => {

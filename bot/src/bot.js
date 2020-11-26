@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
-const client = new Client();
+const client = new Client({ws: { intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_PRESENCES'] }});
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/djdashboard', {

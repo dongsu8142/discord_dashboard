@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { LandingPage, MenuPage, DashboardPage } from './pages';
 

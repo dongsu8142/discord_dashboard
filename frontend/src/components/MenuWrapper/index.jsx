@@ -6,7 +6,6 @@ export function MenuComponent({
 
   return (
     <div>
-        <h1>hello</h1>
         {guilds.included.map((guild, key) => (
             <div key={key}>
                 <li>{guild.name}</li>

@@ -12,6 +12,11 @@ function getMutualGuilds(userGuilds, botGuilds) {
     return { excluded, included };
 }
 
+function getMessageChannel(channels) {
+    const messageChannels = channels.filter((channel) => channel.type === 0)
+    return messageChannels
+}
+
 function encrypt(token) {
     return CryptoJS.AES.encrypt(token, process.env.SECRET_PASSPHRASE);
 }
@@ -20,4 +25,4 @@ function decrypt(token) {
     return CryptoJS.AES.decrypt(token, process.env.SECRET_PASSPHRASE);
 }
 
-module.exports = {getMutualGuilds, encrypt, decrypt};
+module.exports = {getMutualGuilds, encrypt, decrypt, getMessageChannel};

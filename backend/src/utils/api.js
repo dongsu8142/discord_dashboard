@@ -40,4 +40,14 @@ async function getUserGuilds(discordId) {
     return response.json();
 }
 
-module.exports = { getBotGuilds, getGuildRoles, getUserGuilds };
+async function getGuildChannels(guildId) {
+    const response = await fetch(`${DISCORD_API}/guilds/${guildId}/channels`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bot ${TOKEN}`
+        }
+    });
+    return response.json();
+}
+
+module.exports = { getBotGuilds, getGuildRoles, getUserGuilds, getGuildChannels };
