@@ -1,5 +1,8 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const GuildConfig = require('../../database/schemas/GuildConfig');
+const Levels = require('discord-xp');
+
+Levels.setURL(process.env.MONGODB_URL);
 
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
@@ -7,7 +10,14 @@ module.exports = class MessageEvent extends BaseEvent {
   }
   
   async run(client, message) {
+    if (!message.guild) return;
     if (message.author.bot) return;
+    const randomXp = Math.floor(Math.random() * 9) + 1;
+    const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXp);
+    if (hasLeveledUp) {
+      const user = await Levels.fetch(message.author.id, message.guild.id);
+      message.channel.send(`레벨업!! 현재레벨: ${user.level}`);//TODO: 웹사이트와 연결하여 문장바꾸기
+    }
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
     const prefix = guildConfig.get('prefix')
     if (message.content.startsWith(prefix)) {
