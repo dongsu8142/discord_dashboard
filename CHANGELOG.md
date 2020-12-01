@@ -1,3 +1,21 @@
+### 2020-12-01 1.3.0
+### Bot
+## Info
+add UserinfoCommand
+## Level
+
+add mention
+add rank
+
+## Moderation
+add BanCommand
+
+add KickCommand
+
+## Backend, Frontend
+add Send a message when a user leaves the server
+
+
 ### 2020-11-30 1.2.0
 ### Bot
 ## Muisc

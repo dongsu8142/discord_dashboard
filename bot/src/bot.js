@@ -18,21 +18,16 @@ mongoose.connect(process.env.MONGODB_URL, {
     message.channel.send(`음악을 시작합니다. ${track.title} - <${track.url}> - ${track.author} (${track.duration})`)
   })
     .on('queueEnd', (message, queue) => message.channel.send('대기열에 더 이상 음악이 없어서 음악이 중지되었습니다!'))
-    .on('trackAdd', (message, track) => message.channel.send(`${track.title}가 대기열에 추가되었습니다.`))
-    .on('playlistAdd', (message, playlist) => message.channel.send(`${playlist.title}가 대기열에 추가되었습니다. (${playlist.items.length}개)!`))
+    .on('trackAdd', (message, queue, track) => message.channel.send(`${track.title}가 대기열에 추가되었습니다.`))
+    .on('playlistAdd', (message, queue, playlist) => message.channel.send(`${playlist.title}가 대기열에 추가되었습니다. (${playlist.tracks.length}개)!`))
     .on('channelEmpty', (message, queue) => message.channel.send('음성 채널에 더 이상 멤버가 없어 음악이 중단되었습니다!'))
-    .on('botDisconnect', (message, queue) => message.channel.send('채널 연결이 끊어져서 음악이 멈췄어요!'))
+    .on('botDisconnect', (message) => message.channel.send('채널 연결이 끊어져서 음악이 멈췄어요!'))
     .on('searchResults', (message, query, tracks) => {
       const embed = new MessageEmbed()
       .setAuthor(`Here are your search results for ${query}!`)
-      .setDescription(tracks.map((t, i) => `${i + 1}. [${t.title}]()`))
+      .setDescription(tracks.map((t, i) => `${i + 1}. ${t.title}`))
       .setFooter('Send the number of the song you want to play!')
       message.channel.send(embed);
-      // const embed = new MessageEmbed()
-      //   .setAuthor(`Here are your search results for ${query}!`)
-      //   .setFooter('Send the number of the song you want to play!');
-      // tracks.map((t, i) => embed.addField(i + 1, `[${t.title}](${t.url})`, true))
-      // message.channel.send(embed);
     })
     .on('error', (error, message) => {
       switch(error){

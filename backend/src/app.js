@@ -13,6 +13,7 @@ const routes = require('./routes');
 mongoose.connect('mongodb://localhost/djdashboard', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
 });
 
 app.use(express.json());

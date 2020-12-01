@@ -32,3 +32,7 @@ export function getGuildChannels(guildId) {
 export function updateJoinChannel(guildId, joinMemberChannel, joinMemberChannelOn, joinMemberChannelMessage) {
     return axios.put(`${url}/api/discord/guilds/${guildId}/channels/join`, {joinMemberChannel, joinMemberChannelOn, joinMemberChannelMessage}, { withCredentials: true });
 }
+
+export function updateLeaveChannel(guildId, leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage) {
+    return axios.put(`${url}/api/discord/guilds/${guildId}/channels/leave`, {leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage}, { withCredentials: true });
+}

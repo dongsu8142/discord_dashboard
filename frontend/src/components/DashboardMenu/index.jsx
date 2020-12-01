@@ -10,13 +10,17 @@ export function DashboardMenu({
   updatePrefix,
   updateRole,
   updateJoinChannel,
+  updateLeaveChannel,
 }) {
 
   const defaultRoleId = config.defaultRole ? config.defaultRole : ""
-  const joinMemberChannelId = config.joinMemberChannel ? config.joinMemberChannel: ""
+  const joinMemberChannelId = config.joinMemberChannel
   const defaultRoleOn = config.defaultRoleOn
   const joinMemberChannelOn = config.joinMemberChannelOn
-  const joinMemberChannelMessage = config.joinMemberChannelMessage ? config.joinMemberChannelMessage : ""
+  const joinMemberChannelMessage = config.joinMemberChannelMessage
+  const leaveMemberChannelId = config.leaveMemberChannel
+  const leaveMemberChannelOn = config.leaveMemberChannelOn
+  const leaveMemberChannelMessage = config.leaveMemberChannelMessage
   return (
     <div>
       <span>prefix</span>
@@ -76,6 +80,28 @@ export function DashboardMenu({
        )
      } 
     </Formik>
+    <br />
+    <span>Send a message when a user leaves the server</span>
+    <Formik
+      initialValues={{ leaveMemberChannel : leaveMemberChannelId, leaveMemberChannelOn: leaveMemberChannelOn, leaveMemberChannelMessage: leaveMemberChannelMessage }}
+      onSubmit={({leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage}) => {updateLeaveChannel(leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage)}}
+    >
+     {
+       (props) => (
+         <form onSubmit={props.handleSubmit}>
+           <Switch size="lg" defaultIsChecked={leaveMemberChannelOn} onChange={props.handleChange} name="leaveMemberChannelOn" />
+           <Select className="form-control" id="inputState" name="leaveMemberChannel" defaultValue={leaveMemberChannelId} onChange={props.handleChange}>
+              {channels.map((channel, key) => (
+                <option value={channel.id} key={key}>{channel.name}</option>
+              ))}
+            </Select>
+            <Textarea name="leaveMemberChannelMessage" defaultValue={leaveMemberChannelMessage} onChange={props.handleChange}></Textarea>
+            <Button colorScheme="orange" type="submit" children="Update Leave Channel" />
+         </form>
+       )
+     } 
+    </Formik>
+
 
   </div>
   )

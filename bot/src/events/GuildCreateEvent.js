@@ -12,7 +12,7 @@ module.exports = class GuildCreateEvent extends BaseEvent {
       const guildConfig = await GuildConfig.create({
         guildId: guild.id,
         joinMemberChannel: guild.systemChannelID,
-        leavelMemberChannel: guild.systemChannelID,
+        leaveMemberChannel: guild.systemChannelID,
       });
       console.log('Bot has joined the server. Saved to DB');
     } catch (err) {

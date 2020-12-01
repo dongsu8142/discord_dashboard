@@ -34,9 +34,19 @@ const GuildConfigSchema = new mongoose.Schema({
         required: true,
         default: false,
     },
-    leavelMemberChannel: {
+    leaveMemberChannel: {
         type: mongoose.SchemaTypes.String,
         required: false,
+    },
+    leaveMemberChannelMessage: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+        default: "{user}님 안녕히가세요"
+    },
+    leaveMemberChannelOn: {
+        type: mongoose.SchemaTypes.Boolean,
+        required: false,
+        default: false
     },
     memberLogChannel: {
         type: mongoose.SchemaTypes.String,

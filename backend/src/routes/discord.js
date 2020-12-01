@@ -84,4 +84,20 @@ router.put('/guilds/:guildId/channels/join', async (req, res) => {
     }
 });
 
+router.put('/guilds/:guildId/channels/leave', async (req, res) => {
+    const {leaveMemberChannel} = req.body;
+    const {leaveMemberChannelOn} = req.body;
+    const {leaveMemberChannelMessage} = req.body;
+    if (!leaveMemberChannelMessage) return res.status(400).send({ msg: "Bad Request" });
+    if (!leaveMemberChannel) return res.status(400).send({ msg: "Bad Request" });
+    const {guildId} = req.params;
+    try {
+        const update = await GuildConfig.findOneAndUpdate({ guildId }, {leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage}, { new: true });
+        return update ? res.send(update) : res.status(400).send({ msg: "Bad Request" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ msg: "Internal Server Error" });
+    }
+});
+
 module.exports = router;

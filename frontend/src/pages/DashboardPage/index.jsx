@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getGuildConfig, getGuildRoles, getUserDetails, updateDefaultRole, updateGuildPrefix, getGuildChannels, updateJoinChannel } from '../../utils/api';
+import { getGuildConfig, getGuildRoles, getUserDetails, updateDefaultRole, updateGuildPrefix, getGuildChannels, updateJoinChannel, updateLeaveChannel } from '../../utils/api';
 import { DashboardMenu } from '../../components/DashboardMenu';
 
 export function DashboardPage({
@@ -53,6 +53,10 @@ export function DashboardPage({
     updateJoinChannel(match.params.id, joinMemberChannel, joinMemberChannelOn, joinMemberChannelMessage);
   }
 
+  const updateLeaveChannelParent = async (leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage) => {
+    updateLeaveChannel(match.params.id, leaveMemberChannel, leaveMemberChannelOn, leaveMemberChannelMessage);
+  }
+
   return !loading && (
     <div>
       <h1>Dashboard Page</h1>
@@ -64,6 +68,7 @@ export function DashboardPage({
         updateJoinChannel={updateJoinChannelParent}
         updatePrefix={updateGuildPrefixParent} 
         updateRole={updateDefaultRoleParent}
+        updateLeaveChannel={updateLeaveChannelParent}
       />
     </div>
   )
