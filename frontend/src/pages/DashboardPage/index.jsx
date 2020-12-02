@@ -39,7 +39,6 @@ export function DashboardPage({
   const updateGuildPrefixParent = async (prefix) => {
     try {
       const update = await updateGuildPrefix(match.params.id, prefix);
-      console.log(update)
     } catch (err) {
       console.log(err)
     }
@@ -59,17 +58,21 @@ export function DashboardPage({
 
   return !loading && (
     <div>
-      <h1>Dashboard Page</h1>
-      <DashboardMenu 
-        user={user} 
-        config={config} 
-        roles={roles}
-        channels={channels}
-        updateJoinChannel={updateJoinChannelParent}
-        updatePrefix={updateGuildPrefixParent} 
-        updateRole={updateDefaultRoleParent}
-        updateLeaveChannel={updateLeaveChannelParent}
-      />
+      <section id="main-dashboard-content">
+        <h1 id="welcome-title">데시보드 페이지</h1>
+        <section id="grid-container">
+          <DashboardMenu 
+            user={user} 
+            config={config} 
+            roles={roles}
+            channels={channels}
+            updateJoinChannel={updateJoinChannelParent}
+            updatePrefix={updateGuildPrefixParent} 
+            updateRole={updateDefaultRoleParent}
+            updateLeaveChannel={updateLeaveChannelParent}
+          />
+        </section>
+      </section>
     </div>
   )
 }

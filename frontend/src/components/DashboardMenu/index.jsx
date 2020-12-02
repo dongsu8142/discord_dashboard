@@ -22,7 +22,7 @@ export function DashboardMenu({
   const leaveMemberChannelOn = config.leaveMemberChannelOn
   const leaveMemberChannelMessage = config.leaveMemberChannelMessage
   return (
-    <div>
+    <div className="grid-item">
       <span>prefix</span>
       <Formik
       initialValues={{ prefix: config.prefix }}

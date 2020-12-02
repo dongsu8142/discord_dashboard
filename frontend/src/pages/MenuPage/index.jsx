@@ -24,8 +24,12 @@ export function MenuPage({
 
   return !loading && (
     <div>
-      <h1>Menupage</h1>
-      <MenuComponent guilds={guilds} />
+      <section id="main-dashboard-content">
+        <h1 id="welcome-title">메뉴 페이지</h1>
+        <section id="grid-container">
+          <MenuComponent guilds={guilds} />
+        </section>
+      </section>
     </div>
   )
 }

@@ -1,3 +1,7 @@
+### 2020-12-02 1.4.0
+## Frontend
+Css was added and decorated.
+
 ### 2020-12-01 1.3.0
 ### Bot
 ## Info
