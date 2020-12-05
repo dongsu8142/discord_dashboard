@@ -5,6 +5,8 @@ const client = new Client({ws: { intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_PRE
 const mongoose = require('mongoose');
 const { Player } = require("discord-player");
 const player = new Player(client);
+const pathToFfmpeg = require("ffmpeg-static");
+console.log(pathToFfmpeg)
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,

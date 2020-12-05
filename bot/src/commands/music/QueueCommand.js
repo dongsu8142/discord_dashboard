@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class QueueCommand extends BaseCommand {
   constructor() {
-    super('queue', 'music', []);
+    super('재생목록', 'music', ['queue']);
   }
 
   async run(client, message, args) {

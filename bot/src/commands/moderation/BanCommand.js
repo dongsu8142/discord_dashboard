@@ -2,7 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class BanCommand extends BaseCommand {
   constructor() {
-    super('ban', 'moderation', []);
+    super('밴', 'moderation', ['ban']);
   }
 
   run(client, message, args) {

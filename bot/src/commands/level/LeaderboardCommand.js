@@ -3,7 +3,7 @@ const Levels = require('discord-xp');
 
 module.exports = class LeaderboardCommand extends BaseCommand {
   constructor() {
-    super('leaderboard', 'level', []);
+    super('리더보드', 'level', ['leaderboard']);
   }
 
   async run(client, message, args) {

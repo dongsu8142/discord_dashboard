@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 const routes = require('./routes');
 
-mongoose.connect('mongodb://localhost/djdashboard', {
+mongoose.connect('mongodb://mongo:27017/djdashboard', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({
-    origin: "http://127.0.0.1",
+    origin: ["http://127.0.0.1", "http://jjab6.ml"],
     credentials: true
 }))
 

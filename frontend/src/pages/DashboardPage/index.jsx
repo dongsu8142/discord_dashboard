@@ -38,7 +38,7 @@ export function DashboardPage({
 
   const updateGuildPrefixParent = async (prefix) => {
     try {
-      const update = await updateGuildPrefix(match.params.id, prefix);
+      await updateGuildPrefix(match.params.id, prefix);
     } catch (err) {
       console.log(err)
     }
@@ -59,7 +59,7 @@ export function DashboardPage({
   return !loading && (
     <div>
       <section id="main-dashboard-content">
-        <h1 id="welcome-title">데시보드 페이지</h1>
+        <h1 id="welcome-title">대시보드 페이지</h1>
         <section id="grid-container">
           <DashboardMenu 
             user={user} 

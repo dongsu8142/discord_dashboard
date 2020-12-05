@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = "http://127.0.0.1:3000"
+const url = "http://jjam6.ml:3000"
 
 export function getUserDetails() {
     return axios.get(`${url}/api/auth`, { withCredentials: true });

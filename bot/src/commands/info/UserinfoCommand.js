@@ -3,7 +3,7 @@ const { MessageEmbed } =  require('discord.js');
 
 module.exports = class UserinfoCommand extends BaseCommand {
   constructor() {
-    super('userinfo', 'info', []);
+    super('유저정보', 'info', ['userinfo']);
   }
 
   run(client, message, args) {
@@ -23,6 +23,8 @@ module.exports = class UserinfoCommand extends BaseCommand {
     .setTitle(target.username + nickname(member.nickname))
     .setAuthor(target.username, target.displayAvatarURL())
     .setDescription("**이름**: " + target.username + "\n**태그**: " + target.username + "#" + target.discriminator + "\n**아이디**: " + target.id)
+    .addField("상태", member.user.presence.status, true)
+    .addField("게임", member.user.presence.game || '게임을하지 않음.', true)
     .addField("서버 참여 시간", new Date(member.joinedTimestamp).toLocaleString(), true)
     .addField("계정 생성 일", new Date(target.createdTimestamp).toLocaleString(), true)
     .addField("역할", `**[${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`, true)

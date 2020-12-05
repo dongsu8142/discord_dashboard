@@ -6,7 +6,7 @@ const { setLevel } = require('discord-xp');
 
 module.exports = class RankCommand extends BaseCommand {
   constructor() {
-    super('rank', 'level', []);
+    super('랭크', 'level', ['rank']);
   }
 
   async run(client, message, args) {
@@ -33,7 +33,7 @@ module.exports = class RankCommand extends BaseCommand {
       .setProgressBar('#FFA500', "COLOR")
       .setUsername(target.username)
       .setDiscriminator(target.discriminator);
-    card.build()
+    card.build({fontX: "Sans", fontY: "Sans"})
       .then(data => {
         const attatchment = new MessageAttachment(data, 'funny.png')
         message.channel.send(attatchment)

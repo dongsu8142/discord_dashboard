@@ -19,7 +19,21 @@ module.exports = class MessageEvent extends BaseEvent {
       message.channel.send(`레벨업!! 현재레벨: ${user.level}`);//TODO: 웹사이트와 연결하여 문장바꾸기
     }
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
-    const prefix = guildConfig.get('prefix')
+    let prefix
+    if (guildConfig) {
+      prefix = guildConfig.get('prefix');
+    } else {
+      await GuildConfig.create({
+        guildId: message.guild.id,
+        joinMemberChannel: message.guild.systemChannelID,
+        leaveMemberChannel: message.guild.systemChannelID,
+      })
+      const guildConfig2 = await GuildConfig.findOne({ guildId: message.guild.id });
+      prefix = guildConfig2.get('prefix');
+    }
+    if (!prefix) {
+      prefix = "/"
+    }
     if (message.content.startsWith(prefix)) {
       const [cmdName, ...cmdArgs] = message.content
       .slice(prefix.length)
