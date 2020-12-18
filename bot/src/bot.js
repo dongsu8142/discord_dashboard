@@ -6,12 +6,14 @@ const mongoose = require('mongoose');
 const { Player } = require("discord-player");
 const player = new Player(client);
 const pathToFfmpeg = require("ffmpeg-static");
-console.log(pathToFfmpeg)
+const fetch = require('node-fetch');
+global.fetch = fetch;
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 });
 
 (async () => {
@@ -23,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URL, {
     .on('trackAdd', (message, queue, track) => message.channel.send(`${track.title}가 대기열에 추가되었습니다.`))
     .on('playlistAdd', (message, queue, playlist) => message.channel.send(`${playlist.title}가 대기열에 추가되었습니다. (${playlist.tracks.length}개)!`))
     .on('channelEmpty', (message, queue) => message.channel.send('음성 채널에 더 이상 멤버가 없어 음악이 중단되었습니다!'))
+    .on('noResults', (message, query) => message.channel.send(`YouTube에서 다음에 대한 검색 결과가 없습니다. ${query}!`))
     .on('botDisconnect', (message) => message.channel.send('채널 연결이 끊어져서 음악이 멈췄어요!'))
     .on('searchResults', (message, query, tracks) => {
       const embed = new MessageEmbed()

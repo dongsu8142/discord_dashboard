@@ -6,7 +6,6 @@ export function DashboardPage({
   history,
   match
 }) {
-  const [ user, setUser ] = useState(null);
   const [ loading, setLoading ] = useState(true);
   const [ config, setConfig ] = useState({});
   const [ roles, setRoles ] = useState([]);
@@ -15,7 +14,6 @@ export function DashboardPage({
   useEffect(() => {
     getUserDetails()
       .then(({data}) => {
-        setUser(data);
         return getGuildConfig(match.params.id);
       })
       .then(({data}) => {
@@ -37,11 +35,7 @@ export function DashboardPage({
   }, [history, match]);
 
   const updateGuildPrefixParent = async (prefix) => {
-    try {
-      await updateGuildPrefix(match.params.id, prefix);
-    } catch (err) {
-      console.log(err)
-    }
+    await updateGuildPrefix(match.params.id, prefix);
   }
 
   const updateDefaultRoleParent = async (roleId, roleOn) => {
@@ -62,7 +56,6 @@ export function DashboardPage({
         <h1 id="welcome-title">대시보드 페이지</h1>
         <section id="grid-container">
           <DashboardMenu 
-            user={user} 
             config={config} 
             roles={roles}
             channels={channels}

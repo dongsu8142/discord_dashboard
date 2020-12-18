@@ -1,9 +1,7 @@
 import { Formik } from 'formik';
 import { Button, Input, Select, Switch, Textarea } from '@chakra-ui/react';
 
-export function DashboardMenu({
-  guildId,
-  user,
+export default function Panel({
   roles,
   config,
   channels,
@@ -22,7 +20,7 @@ export function DashboardMenu({
   const leaveMemberChannelOn = config.leaveMemberChannelOn
   const leaveMemberChannelMessage = config.leaveMemberChannelMessage
   return (
-    <div className="grid-item">
+    <>
       <span>prefix</span>
       <Formik
       initialValues={{ prefix: config.prefix }}
@@ -103,6 +101,6 @@ export function DashboardMenu({
     </Formik>
 
 
-  </div>
+  </>
   )
 }
