@@ -28,7 +28,7 @@ export default function Sidebar() {
           <div className="icon">
             <i className="fas fa-chart-bar"></i>
           </div>
-          <a href="https://127.0.0.1:2053/api/auth/discord">로그인</a>
+          <a href="https://jjab6.ml:2053/api/auth/discord">로그인</a>
         </div>
       </section>
     </section>
